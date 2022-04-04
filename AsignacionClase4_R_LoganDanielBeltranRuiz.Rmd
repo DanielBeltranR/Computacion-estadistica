@@ -1,0 +1,133 @@
+---
+title: "Asignacion Clase 4 - R"
+author: "Beltran Ruiz Logan Daniel"
+date: "4/4/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readxl)
+library(ggplot2)
+
+```
+
+## Asignacion Estadisticas Descriptivas
+
+```{r}
+#file.choose()#
+XPABLO <- read_excel("C:\\Users\\logan\\OneDrive\\Escritorio\\Otros\\Semestre 2022-1\\Computacion estadistica\\XPABLO.xlsx")
+XPABLO <- XPABLO[-c(16,17,18,19)]
+View(XPABLO)
+
+
+```
+
+```{r}
+
+GruposCa <- cut(x = XPABLO$Ca, breaks = 4) # cut -> Función para crear categorías
+unique(grupos)
+
+##GRAFICO 1##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = GruposCa)) + #Aesthetic
+  geom_point()
+
+```
+```{r}
+
+GruposMg <- cut(x = XPABLO$Mg, breaks = 6) # cut -> Función para crear categorías
+unique(grupos)
+
+##GRAFICO 2##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = GruposMg)) + #Aesthetic
+  geom_point()
+
+```
+```{r}
+
+GruposK <- cut(x = XPABLO$K, breaks = 5) # cut -> Función para crear categorías
+unique(grupos)
+
+##GRAFICO 3##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = GruposK)) + #Aesthetic
+  geom_point()
+
+```
+```{r}
+
+GruposNa <- cut(x = XPABLO$Na, breaks = 4) # cut -> Función para crear categorías
+unique(grupos)
+
+##GRAFICO 4##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = GruposNa)) + #Aesthetic
+  geom_point()
+
+```
+```{r}
+
+Ca_Mg = XPABLO$Ca/XPABLO$Mg
+relCa_Mg = cut(Ca_Mg, breaks = 10)
+unique(relCa_Mg)
+
+##GRAFICO 5##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = relCa_Mg)) + #Aesthetic
+  geom_point()
+
+```
+```{r}
+
+Ca_K = XPABLO$Ca/XPABLO$K
+relCa_K = cut(Ca_K, breaks = 10)
+unique(relCa_K)
+
+##GRAFICO 6##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = relCa_K)) + #Aesthetic
+  geom_point()
+
+```
+```{r}
+
+Ca_Na = XPABLO$Ca/XPABLO$Na
+relCa_Na = cut(Ca_Na, breaks = 10)
+unique(relCa_Na)
+
+##GRAFICO 7##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = relCa_Na)) + #Aesthetic
+  geom_point()
+
+```
+```{r}
+
+Mg_K = XPABLO$Mg/XPABLO$K
+relMg_K = cut(Mg_K, breaks = 10)
+unique(relMg_K)
+
+##GRAFICO 8##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = relMg_K)) + #Aesthetic
+  geom_point()
+
+```
+```{r}
+
+Mg_Na = XPABLO$Mg/XPABLO$Na
+relMg_Na = cut(Mg_Na, breaks = 10)
+unique(relMg_Na)
+
+##GRAFICO 9##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = relMg_Na)) + #Aesthetic
+  geom_point()
+
+```
+```{r}
+
+K_Na = XPABLO$K/XPABLO$Na
+relK_Na = cut(K_Na, breaks = 10)
+unique(relK_Na)
+
+##GRAFICO 10##
+ggplot(XPABLO, aes(x = Long, y = Lat, color = relK_Na)) + #Aesthetic
+  geom_point()
+
+```
+

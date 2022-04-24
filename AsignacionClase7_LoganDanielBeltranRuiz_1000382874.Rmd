@@ -1,0 +1,228 @@
+---
+title: "AsignacionClase7"
+author: "Beltran Ruiz Logan Daniel"
+date: '2022-04-18'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readxl)
+library(ggplot2)
+library(ape)
+```
+
+## Asignacion Estadisticas Descriptivas
+
+```{r}
+#file.choose()#
+XPABLO <- read_excel("C:\\Users\\logan\\OneDrive\\Escritorio\\Otros\\Semestre 2022-1\\Computacion estadistica\\XPABLO.xlsx")
+XPABLO <- XPABLO[-c(16,17,18,19)]
+View(XPABLO)
+
+
+```
+
+```{r}
+#Materia Organica XPABLO#
+LongLat <- expand.grid(x = XPABLO$Long, y = XPABLO$Lat)
+color<-cut(XPABLO$MO, breaks = 5)
+plot(LongLat, pch = 15, cex = 1.5, col = color)
+
+```
+
+```{r}
+
+##Indice de Moran Materia Organica##
+dist_matrix <- as.matrix(dist(cbind(XPABLO$Long, XPABLO$Lat)))
+max(dist_matrix)
+min(dist_matrix)
+dim(dist_matrix)
+##Inversa de la distancia MO##
+dist_matrix_inv <- 1/dist_matrix
+diag(dist_matrix_inv)<-0
+dist_matrix_inv
+
+Moran.I(XPABLO$MO, dist_matrix_inv)
+```
+
+```{r}
+#Calcio XPABLO#
+color<-cut(XPABLO$Ca, breaks = 5)
+plot(LongLat, pch = 15, cex = 1.5, col = color)
+
+```
+
+```{r}
+
+##Indice de Moran Calcio##
+dist_matrix <- as.matrix(dist(cbind(XPABLO$Long, XPABLO$Lat)))
+max(dist_matrix)
+min(dist_matrix)
+dim(dist_matrix)
+##Inversa de la distancia Ca##
+dist_matrix_inv <- 1/dist_matrix
+diag(dist_matrix_inv)<-0
+dist_matrix_inv
+
+Moran.I(XPABLO$Ca, dist_matrix_inv)
+```
+
+```{r}
+#Mg XPABLO#
+color<-cut(XPABLO$Mg, breaks = 5)
+plot(LongLat, pch = 15, cex = 1.5, col = color)
+
+```
+
+
+```{r}
+
+##Indice de Moran Magnesio##
+dist_matrix <- as.matrix(dist(cbind(XPABLO$Long, XPABLO$Lat)))
+max(dist_matrix)
+min(dist_matrix)
+dim(dist_matrix)
+##Inversa de la distancia MO##
+dist_matrix_inv <- 1/dist_matrix
+diag(dist_matrix_inv)<-0
+dist_matrix_inv
+
+Moran.I(XPABLO$Mg, dist_matrix_inv)
+```
+
+```{r}
+#K XPABLO#
+color<-cut(XPABLO$K, breaks = 5)
+plot(LongLat, pch = 15, cex = 1.5, col = color)
+
+```
+
+```{r}
+
+##Indice de Moran Potasio##
+dist_matrix <- as.matrix(dist(cbind(XPABLO$Long, XPABLO$Lat)))
+max(dist_matrix)
+min(dist_matrix)
+dim(dist_matrix)
+##Inversa de la distancia MO##
+dist_matrix_inv <- 1/dist_matrix
+diag(dist_matrix_inv)<-0
+dist_matrix_inv
+
+Moran.I(XPABLO$K, dist_matrix_inv)
+```
+
+```{r}
+#Na XPABLO#
+color<-cut(XPABLO$Na, breaks = 5)
+plot(LongLat, pch = 15, cex = 1.5, col = color)
+
+```
+
+```{r}
+
+##Indice de Moran Sodio##
+dist_matrix <- as.matrix(dist(cbind(XPABLO$Long, XPABLO$Lat)))
+max(dist_matrix)
+min(dist_matrix)
+dim(dist_matrix)
+##Inversa de la distancia MO##
+dist_matrix_inv <- 1/dist_matrix
+diag(dist_matrix_inv)<-0
+dist_matrix_inv
+
+Moran.I(XPABLO$Na, dist_matrix_inv)
+```
+
+
+```{r}
+#Fe XPABLO#
+color<-cut(XPABLO$Fe, breaks = 5)
+plot(LongLat, pch = 15, cex = 1.5, col = color)
+
+```
+
+```{r}
+
+##Indice de Moran Hierro##
+dist_matrix <- as.matrix(dist(cbind(XPABLO$Long, XPABLO$Lat)))
+max(dist_matrix)
+min(dist_matrix)
+dim(dist_matrix)
+##Inversa de la distancia MO##
+dist_matrix_inv <- 1/dist_matrix
+diag(dist_matrix_inv)<-0
+dist_matrix_inv
+
+Moran.I(XPABLO$Fe, dist_matrix_inv)
+```
+
+
+```{r}
+#Cu XPABLO#
+color<-cut(XPABLO$Cu, breaks = 5)
+plot(LongLat, pch = 15, cex = 1.5, col = color)
+
+```
+
+```{r}
+
+##Indice de Moran Cobre##
+dist_matrix <- as.matrix(dist(cbind(XPABLO$Long, XPABLO$Lat)))
+max(dist_matrix)
+min(dist_matrix)
+dim(dist_matrix)
+##Inversa de la distancia MO##
+dist_matrix_inv <- 1/dist_matrix
+diag(dist_matrix_inv)<-0
+dist_matrix_inv
+
+Moran.I(XPABLO$Cu, dist_matrix_inv)
+```
+
+
+```{r}
+#Zn XPABLO#
+color<-cut(XPABLO$Zn, breaks = 5)
+plot(LongLat, pch = 15, cex = 1.5, col = color)
+
+```
+
+```{r}
+
+##Indice de Moran Zn##
+dist_matrix <- as.matrix(dist(cbind(XPABLO$Long, XPABLO$Lat)))
+max(dist_matrix)
+min(dist_matrix)
+dim(dist_matrix)
+##Inversa de la distancia MO##
+dist_matrix_inv <- 1/dist_matrix
+diag(dist_matrix_inv)<-0
+dist_matrix_inv
+
+Moran.I(XPABLO$Zn, dist_matrix_inv)
+```
+
+```{r}
+#CICE XPABLO#
+color<-cut(XPABLO$CICE, breaks = 5)
+plot(LongLat, pch = 15, cex = 1.5, col = color)
+
+```
+
+```{r}
+
+##Indice de Moran CICE##
+dist_matrix <- as.matrix(dist(cbind(XPABLO$Long, XPABLO$Lat)))
+max(dist_matrix)
+min(dist_matrix)
+dim(dist_matrix)
+##Inversa de la distancia MO##
+dist_matrix_inv <- 1/dist_matrix
+diag(dist_matrix_inv)<-0
+dist_matrix_inv
+
+Moran.I(XPABLO$CICE, dist_matrix_inv)
+```

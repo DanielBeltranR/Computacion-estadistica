@@ -1,0 +1,117 @@
+---
+title: "Parcial Presencial Copm. y est."
+author: "Daniel Beltran"
+date: "12/5/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ape)
+```
+
+## R
+Se quieren comparar tratamientos
+*Factor (3 niveles)
+
+```{r}
+set.seed(1000382874)##Numero Cedula 
+coords <- expand.grid(x = 1:10,
+                      y = 1:12)
+CBD <- c(rnorm(30,60,2),
+            rnorm(30,50,1.5),
+            runif(30,30,40),
+            rnorm(30,40,3)); CBD
+Accesion <- gl(4, 30, 120, labels = c('A1','A2','A3','A4'))
+
+df <- data.frame(x=coords$x, y= coords$y, CBD=CBD,
+                 Accesion = Accesion); df
+head(df)
+
+```
+
+##GRAFICAS DEL EJERCICIO
+
+```{r}
+ xy = expand.grid(x=1:8, y=1:9)
+aleat = sample(72)
+library(ggplot2)
+ggplot(df)+
+  aes(x, y, fill=CBD)+
+  geom_tile(color='black', width=0.8, height=0.8)+
+  geom_text(aes(label=Accesion), color='white', size=5)
+```
+```{r}
+ggplot(df)+
+  aes(Accesion, CBD, fill=Accesion)+
+  geom_boxplot()+
+  geom_hline(yintercept = 8)
+
+
+```
+```{r}
+library(dplyr)
+
+df %>%
+  group_by(Accesion)%>%
+  summarise(media=mean(CBD),
+            desv=sd(CBD),
+            cv=100*desv/media)
+
+
+```
+
+***Analisis de Varianza***
+```{r}
+mod1 = aov(CBD ~ Accesion, data = df)
+s_mod1 = summary(mod1)
+p_valor=s_mod1[[1]][1,5]
+ifelse(p_valor<0.05,'Rechazo Ho', 'NO Rechazo Ho')
+s_mod1
+```
+```{r}
+#Prueba de Tukey = comparacion de medias
+TukeyHSD(mod1, 'Accesion')
+```
+```{r}
+#Revisando supuesto de Normalidad
+
+#Normalidad de residuales 
+shapiro.test(mod1$residuals)
+
+
+```
+```{r}
+#Revisando supuesto de Homocedasticidad
+
+#Igualdad de varianzas 
+bartlett.test(mod1$residuals, df$Accesion)
+
+```
+
+
+```{r}
+#Revisando Dependencia espacial
+
+#Indice de Moran
+dist_matrix <- as.matrix(dist(cbind(df$x, df$y)))
+dist_matrix
+
+```
+```{r}
+dist_matrix_inv <- 1 / dist_matrix 
+diag(dist_matrix_inv) <- 0
+dist_matrix_inv
+```
+```{r}
+Moran.I(mod1$residuals, dist_matrix_inv) # p.value < 0.05 <- Dependencia espacial
+```
+
+```{r}
+library(writexl)
+write_xlsx(df, 'datos_CE_Parcial1000382874.xlsx')
+
+
+```
+
+

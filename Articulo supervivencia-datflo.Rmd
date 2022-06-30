@@ -1,0 +1,43 @@
+---
+title: "Articulo supervivencia"
+author: "Beltran Ruiz Logan Daniel"
+date: '2022-06-30'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+```
+```{r}
+datosflo<- read_excel("C:\\Users\\logan\\OneDrive\\Escritorio\\Otros\\Semestre 2022-1\\Computacion estadistica\\floracion_sheet.xlsx")
+datosflo
+```
+
+```{r, warning = FALSE, message=FALSE}
+flo.var<-Surv(datosflo$dosis, datosflo$floreada)
+flo.var
+```
+##MODELADO NO PARAMETRICO
+```{r}
+flo.fit<-survfit(flo.var~1)
+summary(flo.fit)
+plot(flo.fit,xlab="floreada",ylab="dosis")
+
+```
+
+```{r}
+##INTERPRETAR EL ESTIMADOR
+plot(flo.fit,xlab="dosis",ylab="floracion")
+abline(h = 0.82, col='red')
+abline(v = 310, col='red')
+
+```
+
+```{r}
+flo.fit.strata<-survfit(flo.var~total,datosflo)
+plot(flo.fit.strata, lty = 1:4,col=1:4,xlab="Dias",ylab="Plantas", lwd=3)
+
+```
+
+
